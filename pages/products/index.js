@@ -1,4 +1,5 @@
 import {request} from "../../lib/datocms";
+import Link from "next/link";
 
 
 const ALL_PRODUCTS_QUERY = `query allProducts {
@@ -32,8 +33,11 @@ const Product = ({data}) => {
 
         <div className="users">
             {data.allProducts.map((product,index) => (
-                <div className="product">{product.name}</div>
-                
+                <Link href={ `products/${product.id}`}>
+                    <div className="product">{product.name}
+                </div>
+                </Link>
+              
             ))}
         </div>
 
