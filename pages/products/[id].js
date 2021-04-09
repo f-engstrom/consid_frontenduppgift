@@ -11,7 +11,33 @@ const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
   
 }`;
 
-export async function getServerSideProps({params}) {
+const ALL_PRODUCTS_QUERY = `query allProducts {
+  allProducts {
+    id
+  }
+}`;
+
+export async function getStaticPaths() {
+
+
+    const products = await request({
+        query: ALL_PRODUCTS_QUERY,
+        variables: {}
+    });
+
+
+    const paths = products.allProducts.map((product) => ({
+        params: {id: product.id},
+    }))
+
+    console.log("paths", paths)
+
+    return {paths, fallback: false}
+}
+
+
+
+export async function getStaticProps({params}) {
     console.log("params",params)
 
 

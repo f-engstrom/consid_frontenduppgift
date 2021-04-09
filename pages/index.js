@@ -3,40 +3,41 @@ import styles from '../styles/Home.module.css'
 import {request} from "../lib/datocms";
 
 
-const HOMEPAGE_QUERY = `query MyQuery {
-  allProducts {
-    id
-    name
-    price
+const HOMEPAGE_QUERY = `query HomePage {
+  startpage {
+    title
     mainImage {
-      id
+      url
+    }
+    content {
+      value
     }
   }
 }`;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const data = await request({
         query: HOMEPAGE_QUERY,
         variables: {limit: 10}
     });
-    
+
     console.log(data)
     return {
         props: {data}
     };
 }
 
-export default function Home() {
+export default function Home({data}) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>{data.startpage.title}</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    Welcome to <a href="https://nextjs.org">Next.js!</a>
+                    {data.startpage.title}
                 </h1>
 
                 <p className={styles.description}>
