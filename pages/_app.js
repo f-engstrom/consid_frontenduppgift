@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import Layout from "../components/Layout/Layout";
 import App from "next/app";
 import {request} from "../lib/datocms";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const PAGES_QUERY = `query Pages {
