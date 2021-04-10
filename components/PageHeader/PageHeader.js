@@ -57,7 +57,7 @@ const pageHeader = (props) => {
                             <button onClick={handleCollapse} type="button" className="navbar-toggler"
                                     data-toggle="collapse"
                                     data-target="#navbarCollapse">
-                                <span className="navbar-toggler-icon"></span>
+                                <span className="navbar-toggler-icon"/>
                             </button>
                             <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div className="navbar-nav mr-auto py-0">
