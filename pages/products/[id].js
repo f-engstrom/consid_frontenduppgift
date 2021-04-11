@@ -1,5 +1,5 @@
 import {request} from "../../lib/datocms";
-import {ALL_PRODUCTS_QUERY, PRODUCT_QUERY} from "../../querys/querys";
+import {ALL_PRODUCT_IDS_QUERY, PRODUCT_QUERY} from "../../querys/querys";
 import {connect} from "react-redux";
 import {addItemAction} from "../../store/actions";
 
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 
 
     const {allProducts} = await request({
-        query: ALL_PRODUCTS_QUERY,
+        query: ALL_PRODUCT_IDS_QUERY,
         variables: {}
     });
 
