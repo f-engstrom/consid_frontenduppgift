@@ -15,7 +15,7 @@ export const PAGES_QUERY = `query Pages {
   }
 }`;
 
-export const HOMEPAGE_QUERY = `query HomePage {
+export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType) {
   startpage {
     title
     mainImage {
@@ -23,6 +23,14 @@ export const HOMEPAGE_QUERY = `query HomePage {
     }
     content {
       value
+    }
+  }
+  allProducts(first: $nrProducts) {
+    id
+    name
+    price
+    mainImage {
+      url
     }
   }
 }`;
