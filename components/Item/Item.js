@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const Item = ({item, update}) => {
+const item = ({item, update}) => {
 
 
     const [quantity, setQuantity] = useState(item.quantity);
@@ -27,4 +27,4 @@ const Item = ({item, update}) => {
     )
 }
 
-export default Item;
+export default item;
