@@ -50,8 +50,19 @@ export const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
   
 }`;
 
+export const ALL_PRODUCT_IDS_QUERY = `query allProducts {
+  allProducts {
+    id
+  }
+}`;
+
 export const ALL_PRODUCTS_QUERY = `query allProducts {
   allProducts {
     id
+    name
+    price
+    mainImage {
+      url
+    }
   }
 }`;
