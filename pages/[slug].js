@@ -1,22 +1,10 @@
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import {request} from "../lib/datocms";
+import {PAGE_QUERY, PAGES_QUERY} from "../querys/querys";
 
 
-const PAGE_QUERY = `query Page($pageSlug:String) {
-  page(filter: {slug: {eq: $pageSlug}}) {
-    title
-    position
-  }
-}`;
 
-
-const PAGES_QUERY = `query Pages {
-  allPages {
-    title
-    slug
-  }
-}`;
 
 export async function getStaticPaths() {
 
@@ -57,6 +45,8 @@ export async function getStaticProps({params}) {
 export default function ContentPage({data}) {
     
     console.log("page data",data);
+    
+    
     
     return (
         <div>Content Page</div>

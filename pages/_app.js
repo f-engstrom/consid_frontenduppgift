@@ -3,42 +3,34 @@ import Layout from "../components/Layout/Layout";
 import App from "next/app";
 import {request} from "../lib/datocms";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {PAGES_QUERY} from "../querys/querys";
+import {wrapper} from "../store/store";
 
 
-const PAGES_QUERY = `query Pages {
-  allPages {
-    title
-    slug
-    position
-  }
-}`;
+function MyApp({Component, pageProps, allPages}) {
 
 
+    return (
+        <Layout pages={allPages}>
+            <Component {...pageProps} />
+        </Layout>
 
-function MyApp({ Component, pageProps,pages }) {
-    
-    
-  return(
-      <Layout pages={pages.allPages}>
-        <Component {...pageProps} />
-      </Layout>
-      
-  ) 
+    )
 }
-
 
 
 MyApp.getInitialProps = async (appContext) => {
-  // calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(appContext);
+    // calls page's `getInitialProps` and fills `appProps.pageProps`
+    const appProps = await App.getInitialProps(appContext);
 
-    const pages = await request({
+    const {allPages} = await request({
         query: PAGES_QUERY,
-        variables: {limit: 10}
+        variables: {}
     });
-  
-  return { ...appProps,pages }
+
+
+    return {...appProps, allPages}
 }
 
 
-export default MyApp
+export default wrapper.withRedux(MyApp);

@@ -1,32 +1,19 @@
-import {useRouter} from 'next/router'
 import {request} from "../../lib/datocms";
+import {ALL_PRODUCTS_QUERY, PRODUCT_QUERY} from "../../querys/querys";
+import {connect} from "react-redux";
+import {addItemAction} from "../../store/actions";
 
-
-const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
-   product(filter: {id: {eq: $id}}) {
-    id
-    price
-    name
-  }
-  
-}`;
-
-const ALL_PRODUCTS_QUERY = `query allProducts {
-  allProducts {
-    id
-  }
-}`;
 
 export async function getStaticPaths() {
 
 
-    const products = await request({
+    const {allProducts} = await request({
         query: ALL_PRODUCTS_QUERY,
         variables: {}
     });
 
 
-    const paths = products.allProducts.map((product) => ({
+    const paths = allProducts.map((product) => ({
         params: {id: product.id},
     }))
 
@@ -36,9 +23,8 @@ export async function getStaticPaths() {
 }
 
 
-
 export async function getStaticProps({params}) {
-    console.log("params",params)
+    console.log("params", params)
 
 
     const data = await request({
@@ -52,18 +38,30 @@ export async function getStaticProps({params}) {
     };
 }
 
-const Product = ({data}) => {
+const Product = ({data, addItem}) => {
 
-    console.log("product",data)
+    console.log("product", data)
 
+    const item = {...data}
+    
     return (
         <div>
             <p>ID: {data.product.id}</p>
             <p>Price: {data.product.price}</p>
             <p>Name:{data.product.name}</p>
+            
+            <div><button onClick={()=>addItem(item)}>Add to cart</button></div>
         </div>
-      
+        
+
     )
 }
 
-export default Product
+const mapDispatchToProps = {
+   addItem:addItemAction
+};
+
+const mapStateToProps = state => ({
+    basket: state.basket
+});
+export default connect(mapStateToProps,mapDispatchToProps)(Product);

@@ -1,19 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import {request} from "../lib/datocms";
+import {HOMEPAGE_QUERY} from "../querys/querys";
 
 
-const HOMEPAGE_QUERY = `query HomePage {
-  startpage {
-    title
-    mainImage {
-      url
-    }
-    content {
-      value
-    }
-  }
-}`;
+
 
 export async function getStaticProps() {
     const data = await request({
@@ -21,7 +12,6 @@ export async function getStaticProps() {
         variables: {limit: 10}
     });
 
-    console.log(data)
     return {
         props: {data}
     };
