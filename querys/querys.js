@@ -1,7 +1,13 @@
 export const PAGE_QUERY = `query Page($pageSlug:String) {
   page(filter: {slug: {eq: $pageSlug}}) {
     title
-    position
+    mainImage {
+      url
+      title
+    }
+    content {
+      value
+    }
   }
 }`;
 
