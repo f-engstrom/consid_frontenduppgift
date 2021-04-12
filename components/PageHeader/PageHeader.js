@@ -16,11 +16,12 @@ const pageHeader = (props) => {
 
     const dropdownContentLinks =
         props.pages.map((page, index) => (
-            <NavDropdown.Item className="nav-link nav-item ">
-                <Link href={`/${page.slug}`}>
+
+            <Link href={`/${page.slug}`} passHref>
+                <NavDropdown.Item>
                     {page.title}
-                </Link>
-            </NavDropdown.Item>
+                </NavDropdown.Item>
+            </Link>
         ))
 
     return (
@@ -33,9 +34,11 @@ const pageHeader = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/"><Link href={`/products`}>
-                        Products
-                    </Link></Nav.Link>
+                    <Link href={`/products`} passHref>
+                        <Nav.Link>
+                            Products
+                        </Nav.Link>
+                    </Link>
                     <NavDropdown title="About Us" id="collasible-nav-dropdown">
                         {dropdownContentLinks}
                     </NavDropdown>
@@ -52,7 +55,6 @@ const pageHeader = (props) => {
         </Navbar>
 
     );
-    
 
 
 }
