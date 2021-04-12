@@ -13,7 +13,7 @@ const layout = (props) => {
         <div>
             <PageHeader pages={props.pages}/>
 
-            <Container fluid>
+            <Container fluid className='mt-5'>
                 <Row>
                     <Col>
 
