@@ -25,6 +25,7 @@ export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType) {
     title
     mainImage {
       url
+      title
     }
     content {
       value
@@ -71,6 +72,9 @@ export const ALL_PRODUCTS_QUERY = `query allProducts {
     id
     name
     price
+    description {
+      value
+    }
     mainImage {
       url
     }
