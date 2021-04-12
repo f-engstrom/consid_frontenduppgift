@@ -10,17 +10,21 @@ const layout = (props) => {
 
     return (
 
-        <Container fluid>
-            <Row>
-                <Col>
-                    <PageHeader pages={props.pages}/>
+        <div>
+            <PageHeader pages={props.pages}/>
 
-                    {props.children}
+            <Container fluid>
+                <Row>
+                    <Col>
 
-                </Col>
-            </Row>
-        </Container>
-     
+                        {props.children}
+
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+
+
     )
 
 
