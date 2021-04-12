@@ -2,7 +2,6 @@ import {combineReducers} from "redux";
 import {ADD_ITEM, CLEAR_ALL_ITEMS, REMOVE_ITEM, UPDATE_ITEM} from "./types";
 
 
-
 export const basketReducer = (basket = {items: []}, action) => {
     switch (action.type) {
         case UPDATE_ITEM:
@@ -13,7 +12,7 @@ export const basketReducer = (basket = {items: []}, action) => {
             })
             console.log("basketcase", foundItemInBasketIndex);
             let basketItemsArray = [...basket.items];
-            if (itemInBasketIndex !== -1) {
+            if (foundItemInBasketIndex !== -1) {
 
                 basketItemsArray.splice(foundItemInBasketIndex, 1);
 
@@ -23,6 +22,9 @@ export const basketReducer = (basket = {items: []}, action) => {
             }
 
             basket.items = [...basketItemsArray];
+            basket.items.sort(function(a,b){
+                return a.id-b.id;
+            })
 
             return {...basket};
 
@@ -31,8 +33,12 @@ export const basketReducer = (basket = {items: []}, action) => {
             return _result;
 
         case ADD_ITEM:
+
+            console.log("action", action)
+
+
             const itemInBasketIndex = basket.items.findIndex(item => {
-                return item.id === action.payload.product.id
+                return item.id === action.payload.id
             })
             console.log("basketcase", itemInBasketIndex);
             let basketItems = [...basket.items];
@@ -43,15 +49,21 @@ export const basketReducer = (basket = {items: []}, action) => {
 
                 basketItems.push(itemInBasketIndex);
 
+
             } else {
 
-                let newItem = {...action.payload.product, quantity: 1};
+
+                let newItem = {...action.payload, quantity: 1};
                 basketItems.push(newItem);
             }
 
 
             basket.items = [...basketItems];
+            basket.items.sort(function (a, b) {
+                return a.id - b.id;
+            })
 
+            console.log("basket", basket)
 
             return {...basket}
 
