@@ -1,38 +1,112 @@
 import {connect} from "react-redux";
-import {clearAllItemsAction, updateItemAction} from "../store/actions";
-import Item from "../components/Item/Item";
+import {clearAllItemsAction, removeItemAction, updateItemAction} from "../store/actions";
+import CartItem from "../components/CartItem/CartItem";
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import {useState} from "react";
+import Head from "next/head";
 
 
-export function Cart({basket,clearAllItems, updateItem}) {
+export function Cart({basket, clearAllItems, updateItem, removeItem}) {
+
+
+    const calculateTotal = () => {
+
+
+        let total = 0;
+        basket.items.map((item) => {
+            total += item.price * item.quantity;
+
+        })
+
+        return total;
+
+    }
 
     console.log("cartprops", basket);
-    let cartContents = <div>Basket empty</div>;
+    let cart = (
+        <div className="text-center">
+            <h1>Cart Empty!</h1>
+            <p>Get yourself something nice..</p>
+
+        </div>);
+
 
     if (basket.items.length > 0) {
 
-        cartContents = basket.items.map(item => (
-                <Item item={item} update={updateItem}/>
 
+        let cartContents = basket.items.map((item, index) => (
+                <CartItem key={index} item={item} update={updateItem}
+                          remove={removeItem}/>
             )
+        )
+
+        cart = (
+
+
+            <Table striped bordered hover responsive>
+
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {cartContents}
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td></td>
+                    <td> {calculateTotal()}€</td>
+                </tr>
+                </tbody>
+            </Table>
+
         )
     }
 
 
     return (
+        <Container>
+
+            <Head>
+                <title>Cart</title>
+                <link rel="icon" href="https://consid.se/wp-content/uploads/2019/12/Icon-white.svg"/>
+            </Head>
+
+            <Row>
+                <Col>
+                    {cart}
+                </Col>
+            </Row>
+
+            <Row className="mr-auto flex-lg-nowrap">
+                <Col>
+                    <Button className="mr-auto">Checkout</Button>
+
+                </Col>
+
+            </Row>
 
 
-        <div>{cartContents}
-        <button onClick={()=>clearAllItems()}>clear</button>
-        </div>
-        
+        </Container>
+
     )
 
 
 }
 
 const mapDispatchToProps = {
-   clearAllItems : clearAllItemsAction,
-    updateItem:updateItemAction
+    clearAllItems: clearAllItemsAction,
+    updateItem: updateItemAction,
+    removeItem: removeItemAction
 };
 
 const mapStateToProps = state => ({
