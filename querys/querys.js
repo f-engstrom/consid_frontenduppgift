@@ -12,7 +12,6 @@ export const PAGE_QUERY = `query Page($pageSlug:String) {
 }`;
 
 
-
 export const PAGES_QUERY = `query Pages {
   allPages {
     title
@@ -43,9 +42,20 @@ export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType) {
 
 export const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
    product(filter: {id: {eq: $id}}) {
-    id
+     id
     price
     name
+    description {
+      value
+    }
+    mainImage {
+      url
+      title
+    }
+    alternativeImages {
+      url
+      title
+    }
   }
   
 }`;
