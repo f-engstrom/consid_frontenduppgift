@@ -2,20 +2,33 @@ import Link from "next/link";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Badge from "react-bootstrap/Badge";
+import {connect} from "react-redux";
+import {Cart} from "../../pages/cart";
+import {useState} from "react";
 
 
-const pageHeader = (props) => {
+const pageHeader = ({pages,basket}) => {
 
 
-    const handleCollapse = () => {
 
-        document.getElementById("navbarCollapse").classList.toggle("collapse");
+    const calculateCartAmount = () => {
 
+
+        let total = 0;
+        basket.items.map((item) => {
+            total +=  parseInt( item.quantity);
+
+        })
+
+        return total;
 
     }
+    
+  
 
     const dropdownContentLinks =
-        props.pages.map((page, index) => (
+        pages.map((page, index) => (
 
             <Link href={`/${page.slug}`} passHref>
                 <NavDropdown.Item>
@@ -46,7 +59,11 @@ const pageHeader = (props) => {
                 <Nav>
                     <Nav.Link>
                         <Link href={"/cart"} className="btn border">
-                            <img className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
+                            <div>
+                                <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
+                                <img  className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
+                            </div>
+                           
                         </Link>
                     </Nav.Link>
 
@@ -59,4 +76,9 @@ const pageHeader = (props) => {
 
 }
 
-export default pageHeader;
+
+const mapStateToProps = state => ({
+    basket: state.basket
+});
+
+export default connect(mapStateToProps)(pageHeader);
