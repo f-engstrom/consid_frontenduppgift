@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {useState} from "react";
 import Head from "next/head";
 
 
