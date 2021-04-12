@@ -2,7 +2,13 @@ import {request} from "../../lib/datocms";
 import {ALL_PRODUCT_IDS_QUERY, PRODUCT_QUERY} from "../../querys/querys";
 import {connect} from "react-redux";
 import {addItemAction} from "../../store/actions";
-
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import ProductImageCarousel from '../../components/ProductImageCarousel/ProductImageCarousel'
+import {StructuredText} from "react-datocms";
+import Head from "next/head";
 
 export async function getStaticPaths() {
 
@@ -27,31 +33,46 @@ export async function getStaticProps({params}) {
     console.log("params", params)
 
 
-    const data = await request({
+    const {product} = await request({
         query: PRODUCT_QUERY,
         variables: {id: params.id.toString()}
     });
 
-    console.log(data)
+    console.log(product)
     return {
-        props: {data}
+        props: {product}
     };
 }
 
-const Product = ({data, addItem}) => {
+const Product = ({product, addItem}) => {
 
-    console.log("product", data)
+    console.log("product", product)
 
-    const item = {...data}
     
     return (
-        <div>
-            <p>ID: {data.product.id}</p>
-            <p>Price: {data.product.price}</p>
-            <p>Name:{data.product.name}</p>
+        
+        
+        <Container>
+
+            <Head>
+                <title>{product.name}</title>
+                <link rel="icon" href="https://consid.se/wp-content/uploads/2019/12/Icon-white.svg"/>
+            </Head>
             
-            <div><button onClick={()=>addItem(item)}>Add to cart</button></div>
-        </div>
+            <Row className='mt-5'>
+                <Col >
+                    <ProductImageCarousel images={[product.mainImage,...product.alternativeImages]} />
+                </Col>
+                <Col>
+                    <p>Name: {product.name}</p>
+                    <p>Price: {product.price}</p>
+                    <StructuredText data={product.description}/>
+                    <Button onClick={() => addItem(product)}>Add to cart</Button>
+                </Col>
+            </Row>
+            
+          
+        </Container>
         
 
     )
