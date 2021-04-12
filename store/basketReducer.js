@@ -29,12 +29,15 @@ export const basketReducer = (basket = {items: []}, action) => {
             return {...basket};
 
         case REMOVE_ITEM:
-            const _result = omit([action.payload], basket);
-            return _result;
+            
+           const filteredArray = basket.items.filter(item=> item.id !== action.payload);
+           
+           basket.items = filteredArray;
+           
+            return {...basket};
 
         case ADD_ITEM:
 
-            console.log("action", action)
 
 
             const itemInBasketIndex = basket.items.findIndex(item => {
