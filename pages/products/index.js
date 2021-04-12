@@ -1,33 +1,45 @@
 import {request} from "../../lib/datocms";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductListItem from "../../components/ProductListItem/ProductListItem";
 import {ALL_PRODUCTS_QUERY} from "../../querys/querys";
+import Container from 'react-bootstrap/Container';
+import Head from "next/head";
 
 
+export async function getStaticProps({params}) {
 
-export async function getServerSideProps({params}) {
 
-
-    const data = await request({
+    const {allProducts} = await request({
         query: ALL_PRODUCTS_QUERY,
         variables: {}
     });
 
     return {
-        props: {data}
+        props: {allProducts}
     };
 }
 
-const Product = ({data}) => {
+const Product = ({allProducts}) => {
 
+    console.log("products", allProducts)
 
+    
+    
+    
     return (
 
-        <div className="users">
-            {data.allProducts.map((product, index) => (
-                <ProductCard product={product}/>
+        <Container>
+
+            <Head>
+                <title>Products</title>
+                <link rel="icon" href="https://consid.se/wp-content/uploads/2019/12/Icon-white.svg"/>
+            </Head>
+            
+            {allProducts.map((product, index) => (
+
+                 <ProductListItem product={product}/>
 
             ))}
-        </div>
+        </Container>
 
     )
 }
