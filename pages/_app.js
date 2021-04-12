@@ -20,7 +20,7 @@ function MyApp({Component, pageProps, allPages}) {
 
 
 MyApp.getInitialProps = async (appContext) => {
-    // calls page's `getInitialProps` and fills `appProps.pageProps`
+    
     const appProps = await App.getInitialProps(appContext);
 
     const {allPages} = await request({
