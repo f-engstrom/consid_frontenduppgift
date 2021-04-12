@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Head from "next/head";
-
+import Link from 'next/link'
 
 export function Cart({basket, clearAllItems, updateItem, removeItem}) {
 
@@ -88,8 +88,9 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
 
             <Row className="mr-auto flex-lg-nowrap">
                 <Col>
-                    <Button className="mr-auto">Checkout</Button>
-
+                    <Link href={"/checkout"}>
+                        <Button className="mr-auto">Checkout</Button>
+                    </Link>
                 </Col>
 
             </Row>
