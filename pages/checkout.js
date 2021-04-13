@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import {connect} from "react-redux";
 import OrderSummary from "../components/OrderSummary/OrderSummary";
 import {clearAllItemsAction} from "../store/actions";
+import Head from "next/head";
 
 const checkout = ({basket,clearAllItems}) => {
 
@@ -24,6 +25,11 @@ const checkout = ({basket,clearAllItems}) => {
     return (
         <Container>
 
+            <Head>
+                <title>Checkout</title>
+                <link rel="icon" href="https://consid.se/wp-content/uploads/2019/12/Icon-white.svg"/>
+            </Head>
+            
             <Row>
 
                 {summary}
