@@ -6,10 +6,10 @@ import Badge from "react-bootstrap/Badge";
 import {connect} from "react-redux";
 import {Cart} from "../../pages/cart";
 import {useState} from "react";
+import Col from "react-bootstrap/Col";
 
 
-const pageHeader = ({pages,basket}) => {
-
+const pageHeader = ({pages, basket}) => {
 
 
     const calculateCartAmount = () => {
@@ -17,15 +17,14 @@ const pageHeader = ({pages,basket}) => {
 
         let total = 0;
         basket.items.map((item) => {
-            total +=  parseInt( item.quantity);
+            total += parseInt(item.quantity);
 
         })
 
         return total;
 
     }
-    
-  
+
 
     const dropdownContentLinks =
         pages.map((page) => (
@@ -40,10 +39,24 @@ const pageHeader = ({pages,basket}) => {
     return (
 
 
-        <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar sticky="top" collapseOnSelect expand="md" bg="dark" variant="dark">
             <Navbar.Brand><Link passHref href={`/`}>
-               <a style={{color:"white"}} href={""}> Consid Shopper</a>
+                <a style={{color: "white"}} href={""}> Consid Shopper</a>
             </Link></Navbar.Brand>
+
+            <Nav className=" d-sm-block ml-auto d-md-none d-l-none d-xl-none">
+            <Nav.Link>
+                    <Link href={"/cart"} className="btn border">
+                        <div>
+                            <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
+                            <img className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
+                        </div>
+
+                    </Link>
+                </Nav.Link>
+
+            </Nav>
+            
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
@@ -56,20 +69,23 @@ const pageHeader = ({pages,basket}) => {
                         {dropdownContentLinks}
                     </NavDropdown>
                 </Nav>
-              
+
+                <Nav className="d-none d-sm-none d-xs-none d-md-block d-lg-block d-xl-block" >
+                    <Nav.Link>
+                        <Link href={"/cart"} className="btn border">
+                            <div>
+                                <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
+                                <img className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
+                            </div>
+
+                        </Link>
+                    </Nav.Link>
+
+                </Nav>
+
             </Navbar.Collapse>
-            <Nav>
-                <Nav.Link>
-                    <Link href={"/cart"} className="btn border">
-                        <div>
-                            <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
-                            <img className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
-                        </div>
 
-                    </Link>
-                </Nav.Link>
 
-            </Nav>
         </Navbar>
 
     );
