@@ -12,7 +12,7 @@ const productImageCarousel = ({images})=> {
 
     
     const carouselImages = images.map(image => (
-        <Carousel.Item>
+        <Carousel.Item key={image.url}>
             <img
                 className="d-block w-100"
                 src={image.url}
