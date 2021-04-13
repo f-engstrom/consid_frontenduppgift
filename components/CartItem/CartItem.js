@@ -30,7 +30,7 @@ const item = ({item, update,remove}) => {
         <tr className="align-items-center">
 
 
-            <td className="align-middle"><Image src={item.mainImage.url} style={{maxHeight: 171 + "px", maxWidth: 180 + "px"}} rounded/>
+            <td className="align-middle"><Image fluid src={item.mainImage.url} style={{maxHeight: 171 + "px", maxWidth: 180 + "px"}} rounded/>
                <strong className="p-3"> {item.name}</strong>  </td>
             <td className="align-middle">{item.price} € </td>
            <td className="align-middle"> <input type="number" onChange={(event) => handleUpdate(event.target.value)} value={quantity}/></td>

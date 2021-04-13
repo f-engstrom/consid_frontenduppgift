@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Head from "next/head";
 import Link from 'next/link'
 
-export function Cart({basket, clearAllItems, updateItem, removeItem}) {
+export function Cart({basket, updateItem, removeItem}) {
 
 
     const calculateTotal = () => {
@@ -45,7 +45,7 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
         cart = [
 
 
-            <Table striped bordered hover responsive>
+            <Table key={"table"} striped bordered hover responsive>
 
                 <thead>
                 <tr>
@@ -67,7 +67,7 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
                 </tbody>
             </Table>
 
-        ,<Row className="mr-auto flex-lg-nowrap">
+        ,<Row key={"row"} className="mr-auto flex-lg-nowrap">
             <Col>
                 <Link href={"/checkout"}>
                     <Button className="mr-auto">Checkout</Button>
@@ -105,7 +105,6 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
 }
 
 const mapDispatchToProps = {
-    clearAllItems: clearAllItemsAction,
     updateItem: updateItemAction,
     removeItem: removeItemAction
 };
