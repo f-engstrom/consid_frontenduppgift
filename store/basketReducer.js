@@ -6,11 +6,9 @@ export const basketReducer = (basket = {items: []}, action) => {
     switch (action.type) {
         case UPDATE_ITEM:
 
-            console.log("ding", action.payload);
             const foundItemInBasketIndex = basket.items.findIndex(item => {
                 return item.id === action.payload.id
             })
-            console.log("basketcase", foundItemInBasketIndex);
             let basketItemsArray = [...basket.items];
             if (foundItemInBasketIndex !== -1) {
 
@@ -18,7 +16,6 @@ export const basketReducer = (basket = {items: []}, action) => {
 
                 basketItemsArray.push(action.payload);
 
-                console.log("basketitemsarray", basketItemsArray);
             }
 
             basket.items = [...basketItemsArray];
@@ -37,42 +34,34 @@ export const basketReducer = (basket = {items: []}, action) => {
             return {...basket};
 
         case ADD_ITEM:
-
-
-
+            
             const itemInBasketIndex = basket.items.findIndex(item => {
                 return item.id === action.payload.id
             })
-            console.log("basketcase", itemInBasketIndex);
-            let basketItems = [...basket.items];
+            
             if (itemInBasketIndex !== -1) {
 
                 let itemInBasket = basket.items[itemInBasketIndex];
                 itemInBasket.quantity++;
-
-                basketItems.push(itemInBasketIndex);
-
+                
 
             } else {
 
 
                 let newItem = {...action.payload, quantity: 1};
-                basketItems.push(newItem);
+                basket.items.push(newItem);
             }
 
 
-            basket.items = [...basketItems];
             basket.items.sort(function (a, b) {
                 return a.id - b.id;
             })
 
-            console.log("basket", basket)
-
+            
             return {...basket}
 
         case CLEAR_ALL_ITEMS:
 
-            console.log("clear items");
             basket.items = [];
 
 
