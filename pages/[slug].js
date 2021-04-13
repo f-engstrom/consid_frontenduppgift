@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import {request} from "../lib/datocms";
 import {PAGE_QUERY, PAGES_QUERY} from "../querys/querys";
@@ -7,7 +6,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import ProductCard from "../components/ProductCard/ProductCard";
 
 export async function getStaticPaths() {
 

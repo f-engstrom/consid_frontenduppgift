@@ -4,9 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from "react-bootstrap/Badge";
 import {connect} from "react-redux";
-import {Cart} from "../../pages/cart";
-import {useState} from "react";
-import Col from "react-bootstrap/Col";
+
 
 
 const pageHeader = ({pages, basket}) => {

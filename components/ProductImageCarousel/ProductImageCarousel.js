@@ -1,6 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
 import {useState} from "react";
-import ProductCard from "../ProductCard/ProductCard";
 
 const productImageCarousel = ({images})=> {
     const [index, setIndex] = useState(0);

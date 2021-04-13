@@ -30,7 +30,7 @@ export default function Home({startpage, allProducts}) {
 
 
     return (
-        <Container >
+        <Container>
             <Head>
                 <title>{startpage.title}</title>
                 <link rel="icon" href="/favicon.ico"/>

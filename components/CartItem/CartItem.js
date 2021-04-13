@@ -1,5 +1,4 @@
 import {useState} from "react";
-import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image'
 import {XCircle} from 'react-bootstrap-icons';
 const item = ({item, update,remove}) => {

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {clearAllItemsAction, removeItemAction, updateItemAction} from "../store/actions";
+import { removeItemAction, updateItemAction} from "../store/actions";
 import CartItem from "../components/CartItem/CartItem";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
