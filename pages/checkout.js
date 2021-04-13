@@ -10,7 +10,6 @@ const checkout = ({basket,clearAllItems}) => {
     const {items} = basket;
 
  
-console.log("items",items.length)
     
     let summary = (<Col><h1 style={{textAlign:"center"}}>Oh no, your cart is empty!</h1></Col>)
 
@@ -24,12 +23,6 @@ console.log("items",items.length)
 
     return (
         <Container>
-
-            <Row>
-                <Col>
-
-                </Col>
-            </Row>
 
             <Row>
 

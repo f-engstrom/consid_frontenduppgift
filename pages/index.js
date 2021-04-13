@@ -12,7 +12,11 @@ import Col from "react-bootstrap/Col";
 export async function getStaticProps() {
     const {startpage, allProducts} = await request({
         query: HOMEPAGE_QUERY,
-        variables: {nrProducts: 4}
+        variables: {
+            mainImageHeight:400,
+            nrProducts: 4,
+            productImagesHeight:200
+        }
     });
 
 
@@ -43,10 +47,13 @@ export default function Home({startpage, allProducts}) {
 
             </Row>
             
-            <Row>
+            <Row className={"bg-gray"}>
+                <Col xs={12}>
+                    <h2>Featured Products</h2>
+                </Col>
                 {
                     allProducts.map(product =>
-                        <ProductCard product={product}/>)
+                        <ProductCard key={product.id} product={product}/>)
                 }
             </Row>
            

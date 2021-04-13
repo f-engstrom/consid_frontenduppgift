@@ -6,14 +6,13 @@ import Col from 'react-bootstrap/Col';
 
 const layout = (props) => {
 
-    console.log("layoutprops", props)
 
     return (
 
         <div>
             <PageHeader pages={props.pages}/>
 
-            <Container fluid className='mt-5'>
+            <Container fluid className='mt-5 mb-5'>
                 <Row>
                     <Col>
 

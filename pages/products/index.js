@@ -3,6 +3,10 @@ import ProductListItem from "../../components/ProductListItem/ProductListItem";
 import {ALL_PRODUCTS_QUERY} from "../../querys/querys";
 import Container from 'react-bootstrap/Container';
 import Head from "next/head";
+import {addItemAction} from "../../store/actions";
+import {connect} from "react-redux";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 
 export async function getStaticProps({params}) {
@@ -10,7 +14,7 @@ export async function getStaticProps({params}) {
 
     const {allProducts} = await request({
         query: ALL_PRODUCTS_QUERY,
-        variables: {}
+        variables: {productImagesHeight:150}
     });
 
     return {
@@ -18,11 +22,8 @@ export async function getStaticProps({params}) {
     };
 }
 
-const Product = ({allProducts}) => {
+const Products = ({allProducts, addItem}) => {
 
-    console.log("products", allProducts)
-
-    
     
     
     return (
@@ -34,14 +35,28 @@ const Product = ({allProducts}) => {
                 <link rel="icon" href="https://consid.se/wp-content/uploads/2019/12/Icon-white.svg"/>
             </Head>
             
-            {allProducts.map((product, index) => (
+            <Row className="d-flex justify-content-center">
+                <Col md={10}>
+                    {allProducts.map((product) => (
 
-                 <ProductListItem product={product}/>
+                        <ProductListItem key={product.id} product={product} addToCart={addItem}/>
 
-            ))}
+                    ))}
+                </Col>
+            
+            </Row>
+         
         </Container>
 
     )
 }
 
-export default Product
+
+const mapDispatchToProps = {
+    addItem: addItemAction
+};
+
+const mapStateToProps = state => ({
+    basket: state.basket
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

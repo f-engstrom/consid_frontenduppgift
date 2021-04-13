@@ -32,7 +32,10 @@ export async function getStaticProps({params}) {
 
     const {page} = await request({
         query: PAGE_QUERY,
-        variables: {pageSlug: params.slug}
+        variables: {
+            pageSlug: params.slug,
+            mainImageHeight: 400,
+        }
     });
 
     return {
@@ -42,8 +45,6 @@ export async function getStaticProps({params}) {
 
 
 export default function ContentPage({page}) {
-
-    console.log("page data", page);
 
 
     return (
@@ -56,12 +57,18 @@ export default function ContentPage({page}) {
 
 
             <Row>
+                <Col className={"text-center"} md={12}>
+                    <h1>{page.title}</h1>
+
+                </Col>
+            </Row>
+
+            <Row>
                 <Col md={12} className="text-center">
-                    <Image style={{width: 900, height: 500}} fluid
+                    <Image  fluid
                            src={page.mainImage.url} alt=""/>
                 </Col>
-                <Col md={12} className="text-center"><h1>{page.title}</h1></Col>
-                <Col md={12} className="text-center">
+                <Col className="mt-3 text-justify" md={12} >
                     <StructuredText data={page.content}/>
                 </Col>
 

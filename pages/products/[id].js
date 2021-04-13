@@ -23,22 +23,22 @@ export async function getStaticPaths() {
         params: {id: product.id},
     }))
 
-    console.log("paths", paths)
 
     return {paths, fallback: false}
 }
 
 
 export async function getStaticProps({params}) {
-    console.log("params", params)
 
 
     const {product} = await request({
         query: PRODUCT_QUERY,
-        variables: {id: params.id.toString()}
+        variables: {id: params.id.toString(),
+            imagesHeight:433,
+            imagesWidth: 635
+        }
     });
 
-    console.log(product)
     return {
         props: {product}
     };
@@ -46,9 +46,10 @@ export async function getStaticProps({params}) {
 
 const Product = ({product, addItem}) => {
 
-    console.log("product", product)
 
-    
+    const cartItem = {id: product.id, mainImage: {url: product.mainImage.url}, name: product.name, price: product.price}
+
+
     return (
         
         
@@ -60,14 +61,14 @@ const Product = ({product, addItem}) => {
             </Head>
             
             <Row className='mt-5'>
-                <Col >
+                <Col md={6} xs={12} >
                     <ProductImageCarousel images={[product.mainImage,...product.alternativeImages]} />
                 </Col>
-                <Col>
-                    <p>Name: {product.name}</p>
-                    <p>Price: {product.price}</p>
+                <Col md={6} xs={12}>
+                    <h5 className={"mt-3"}>{product.name}</h5>
+                    <p>{product.price} €</p>
                     <StructuredText data={product.description}/>
-                    <Button onClick={() => addItem(product)}>Add to cart</Button>
+                    <Button onClick={() => addItem(cartItem)}>Add to cart</Button>
                 </Col>
             </Row>
             

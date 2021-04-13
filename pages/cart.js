@@ -25,7 +25,6 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
 
     }
 
-    console.log("cartprops", basket);
     let cart = (
         <div className="text-center">
             <h1>Cart Empty!</h1>
@@ -38,12 +37,12 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
 
 
         let cartContents = basket.items.map((item, index) => (
-                <CartItem key={index} item={item} update={updateItem}
+                <CartItem key={item.id} item={item} update={updateItem}
                           remove={removeItem}/>
             )
         )
 
-        cart = (
+        cart = [
 
 
             <Table striped bordered hover responsive>
@@ -63,12 +62,21 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
                     <td>Total</td>
                     <td></td>
                     <td></td>
-                    <td> {calculateTotal()}€</td>
+                    <td> {calculateTotal()} €</td>
                 </tr>
                 </tbody>
             </Table>
 
-        )
+        ,<Row className="mr-auto flex-lg-nowrap">
+            <Col>
+                <Link href={"/checkout"}>
+                    <Button className="mr-auto">Checkout</Button>
+                </Link>
+            </Col>
+
+        </Row>
+ 
+        ]
     }
 
 
@@ -86,14 +94,7 @@ export function Cart({basket, clearAllItems, updateItem, removeItem}) {
                 </Col>
             </Row>
 
-            <Row className="mr-auto flex-lg-nowrap">
-                <Col>
-                    <Link href={"/checkout"}>
-                        <Button className="mr-auto">Checkout</Button>
-                    </Link>
-                </Col>
-
-            </Row>
+         
 
 
         </Container>

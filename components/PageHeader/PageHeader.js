@@ -28,9 +28,9 @@ const pageHeader = ({pages,basket}) => {
   
 
     const dropdownContentLinks =
-        pages.map((page, index) => (
+        pages.map((page) => (
 
-            <Link href={`/${page.slug}`} passHref>
+            <Link key={page.slug} href={`/${page.slug}`} passHref>
                 <NavDropdown.Item>
                     {page.title}
                 </NavDropdown.Item>
@@ -40,9 +40,9 @@ const pageHeader = ({pages,basket}) => {
     return (
 
 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand><Link href={`/`}>
-                Consid Shopper
+        <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand><Link passHref href={`/`}>
+               <a style={{color:"white"}} href={""}> Consid Shopper</a>
             </Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -52,23 +52,24 @@ const pageHeader = ({pages,basket}) => {
                             Products
                         </Nav.Link>
                     </Link>
-                    <NavDropdown title="About Us" id="collasible-nav-dropdown">
+                    <NavDropdown title="About Us" id="collapsible-nav-dropdown">
                         {dropdownContentLinks}
                     </NavDropdown>
                 </Nav>
-                <Nav>
-                    <Nav.Link>
-                        <Link href={"/cart"} className="btn border">
-                            <div>
-                                <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
-                                <img  className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
-                            </div>
-                           
-                        </Link>
-                    </Nav.Link>
-
-                </Nav>
+              
             </Navbar.Collapse>
+            <Nav>
+                <Nav.Link>
+                    <Link href={"/cart"} className="btn border">
+                        <div>
+                            <Badge className="m-2" variant="light">{calculateCartAmount()}</Badge>
+                            <img className="text-primary" style={{height: 2 + 'em'}} src="/cart.svg" alt=""/>
+                        </div>
+
+                    </Link>
+                </Nav.Link>
+
+            </Nav>
         </Navbar>
 
     );

@@ -9,7 +9,6 @@ const orderSummary = ({items,clear})=> {
 
     
 
-    console.log("order summary",items)
     
     const calculateTotal = () => {
 
@@ -33,48 +32,47 @@ const orderSummary = ({items,clear})=> {
     
     
     return(
-        <Col class="col-md-5">
-            <Card class="card border-0 ">
-                <Card.Header class="card-header card-2">
-                    <Card.Text class="card-text text-muted mt-md-4 mb-2 space">YOUR ORDER</Card.Text>
+        <Col md={5} className={"mx-auto"} >
+            <Card className="card border-0 ">
+                <Card.Header className=" card-2">
+                    <Card.Text className="text-muted mt-md-4 mb-2 space">YOUR ORDER</Card.Text>
                     <hr className="my-2"/>
                 </Card.Header>
-                <Card.Body class="card-body pt-0">
+                <Card.Body className="pt-0">
                     {cartItems}
                     <hr className="my-2"/>
-                    <div className="row ">
-                        <div className="col">
-                            <div className="row justify-content-between">
-                                <div className="col-4">
+                    <Row >
+                        <Col >
+                            <Row className="justify-content-between">
+                                <Col className="col-4">
                                     <p className="mb-1"><b>Subtotal</b></p>
-                                </div>
+                                </Col>
                                 <div className="flex-sm-col col-auto">
                                     <p className="mb-1"><b>{calculateTotal()} €</b></p>
                                 </div>
-                            </div>
-                            <div className="row justify-content-between">
-                                <div className="col">
+                            </Row>
+                            <Row className="justify-content-between">
+                                <Col className="col">
                                     <p className="mb-1"><b>Shipping</b></p>
-                                </div>
+                                </Col>
                                 <div className="flex-sm-col col-auto">
                                     <p className="mb-1"><b>0 SEK</b></p>
                                 </div>
-                            </div>
-                            <div className="row justify-content-between">
-                                <div className="col-4">
+                            </Row>
+                            <Row className="justify-content-between">
+                                <Col className="col-4">
                                     <p><b>Total</b></p>
-                                </div>
+                                </Col>
                                 <div className="flex-sm-col col-auto">
                                     <p className="mb-1"><b>{calculateTotal()} €</b></p>
                                 </div>
-                            </div>
+                            </Row>
                             <hr className="my-0"/>
-                        </div>
-                    </div>
-                    <Row class="row mb-5 mt-4 ">
-                        <Col class="row mb-md-5">
+                        </Col>
+                    </Row>
+                    <Row >
+                        <Col >
                             <Link href={"/confirmation"}>
-
                                 <Button type="button" onClick={() => clear()} name="" id=""
                                         className="btn btn-lg btn-block ">
                                     PURCHASE {calculateTotal()} €
