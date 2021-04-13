@@ -1,8 +1,8 @@
-export const PAGE_QUERY = `query Page($pageSlug:String) {
+export const PAGE_QUERY = `query Page($pageSlug:String,$mainImageHeight:FloatType) {
   page(filter: {slug: {eq: $pageSlug}}) {
     title
     mainImage {
-      url
+      url(imgixParams:{h:$mainImageHeight,fit:crop})
       title
     }
     content {
@@ -20,11 +20,11 @@ export const PAGES_QUERY = `query Pages {
   }
 }`;
 
-export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType) {
+export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType,$mainImageHeight:FloatType,$productImagesHeight:FloatType) {
   startpage {
     title
     mainImage {
-      url
+      url(imgixParams:{h:$mainImageHeight,fit:crop})
       title
     }
     content {
@@ -36,12 +36,12 @@ export const HOMEPAGE_QUERY = `query HomePage($nrProducts:IntType) {
     name
     price
     mainImage {
-      url
+      url(imgixParams:{h:$productImagesHeight,fit:crop})
     }
   }
 }`;
 
-export const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
+export const PRODUCT_QUERY = `query ProductQuery($id:ItemId,$imagesHeight:FloatType,$imagesWidth:FloatType) {
    product(filter: {id: {eq: $id}}) {
      id
     price
@@ -50,11 +50,11 @@ export const PRODUCT_QUERY = `query ProductQuery($id:ItemId) {
       value
     }
     mainImage {
-      url
+      url(imgixParams:{w:$imagesWidth,h:$imagesHeight,fit:crop})
       title
     }
     alternativeImages {
-      url
+      url(imgixParams:{w:$imagesWidth,h:$imagesHeight,fit:crop})
       title
     }
   }
@@ -67,7 +67,7 @@ export const ALL_PRODUCT_IDS_QUERY = `query allProducts {
   }
 }`;
 
-export const ALL_PRODUCTS_QUERY = `query allProducts {
+export const ALL_PRODUCTS_QUERY = `query allProducts($productImagesHeight:FloatType) {
   allProducts {
     id
     name
@@ -76,7 +76,7 @@ export const ALL_PRODUCTS_QUERY = `query allProducts {
       value
     }
     mainImage {
-      url
+      url(imgixParams:{h:$productImagesHeight,fit:crop})
     }
   }
 }`;
